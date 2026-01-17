@@ -71,25 +71,25 @@ This design ensures **faithful, non-hallucinatory answers**.
 
 ### 1️⃣ Clone the repository
 
-git clone https://github.com/your-username/policy-RAG-BOT.git
-cd policy-RAG-BOT
+- git clone https://github.com/your-username/policy-RAG-BOT.git
+- cd policy-RAG-BOT
 
 ## 🚀 Getting Started
 
 ### 2️⃣ Create and activate a virtual environment
 
-python -m venv .venv
-source .venv/bin/activate  # macOS/Linux
+- python -m venv .venv
+- source .venv/bin/activate  # macOS/Linux
 
 ### 3️⃣ Install dependencies
-pip install -r requirements.txt
+- pip install -r requirements.txt
 
 ### 4️⃣ Configure environment variables
-This project does not ship with API keys.
-Copy the example environment file:
+- This project does not ship with API keys.
+- Copy the example environment file:
 
-cp example.env .env
-Edit .env to choose your LLM provider:
+- cp example.env .env
+- Edit .env to choose your LLM provider:
 
 ### Preparing the Vector Database
 
@@ -99,45 +99,45 @@ Year-End Review 2024: Ministry of Environment, Forest and Climate Change (India)
 
 ### To generate the vector database, run:
 
-python vectordb.py
+- python vectordb.py
 
-This step:
-Loads the policy document
-Generates embeddings
-Persists them to the vector_db/ directory
-You may replace or extend this with any government policy PDF or document.
+- This step:
+- Loads the policy document
+- Generates embeddings
+- Persists them to the vector_db/ directory
+- You may replace or extend this with any government policy PDF or document.
 
 ### 💬 Running the Application
 
-With memory-enabled chatbot
-streamlit run bot.py
-Stateless version (no memory)
-streamlit run test.py
+- With memory-enabled chatbot
+- streamlit run bot.py
+- Stateless version (no memory)
+- Streamlit run test.py
 
 ### Demo 
-Example Question:
-How many projects were sanctioned overall during 2024 by Ministry of environment?
-Expected Behavior:
-Answers strictly from retrieved policy context
-Refuses politely if information is missing
-Suggests related policy information when refusing
+- Example Question:
+- How many projects were sanctioned overall during 2024 by Ministry of environment?
+- Expected Behavior:
+- Answers strictly from retrieved policy context
+- Refuses politely if information is missing
+- Suggests related policy information when refusing
 
 ### 📁 Project Structure
-policy-RAG-BOT/
-├── bot.py                # Streamlit app with chat memory
-├── test.py               # Stateless version
-├── vectordb.py           # Document ingestion & vector DB creation
-├── vector_db/            # Persisted Chroma embeddings
-├── example.env           # Environment variable template
-├── requirements.txt
-└── README.md
+- policy-RAG-BOT/
+- ├── bot.py                # Streamlit app with chat memory
+- ├── test.py               # Stateless version
+- ├── vectordb.py           # Document ingestion & vector DB creation
+- ├── vector_db/            # Persisted Chroma embeddings
+- ├── example.env           # Environment variable template
+- ├── requirements.txt
+- └── README.md
 
 ### 🛣️ Roadmap (v2 – Work in Progress)
-Planned enhancements:
-Evaluation of chatbot
-Query rewriting & semantic expansion
-Conflict detection across documents
-Failure-aware reasoning paths
-Multi-document comparison
-Hybrid retrieval strategies
-Explicit source attribution
+- Planned enhancements:
+- Evaluation of chatbot
+- Query rewriting & semantic expansion
+- Conflict detection across documents
+- Failure-aware reasoning paths
+- Multi-document comparison
+- Hybrid retrieval strategies
+- Explicit source attribution
