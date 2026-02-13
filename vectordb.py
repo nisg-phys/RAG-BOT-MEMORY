@@ -1,11 +1,12 @@
 import os
 from langchain_community.document_loaders import DirectoryLoader, TextLoader,PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
+from config import EMBEDDING_MODEL, VECTOR_DB_DIR, CHUNK_SIZE, CHUNK_OVERLAP
 
 DATA_PATH = "data"
-DB_PATH = "vector_db"
+DB_PATH = VECTOR_DB_DIR
 
 #CREATE DATABASE FUNCTION
 def create_vector_db():
@@ -32,13 +33,13 @@ def create_vector_db():
 
     #CHUNK THE TEXT
     print("---[2/4] Splitting documents into chunks---")
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size= CHUNK_SIZE , chunk_overlap=CHUNK_OVERLAP)
     chunks = text_splitter.split_documents(documents)
     print(f"Split into {len(chunks)} chunks.")
 
     #CREATE EMBEDDINGS
     print("---[3/4] Creating embeddings using HuggingFace---")
-    embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+    embedding_model = HuggingFaceEmbeddings(model_name= EMBEDDING_MODEL)
     print("---[4/4] Creating vector database---")
     db = Chroma.from_documents(documents=chunks, embedding= embedding_model, persist_directory=DB_PATH)
     print(f"Vector database created at {DB_PATH}")

@@ -15,6 +15,7 @@ from langchain_chroma import Chroma
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
+from config import VECTOR_DB_DIR, RETRIEVAL_K
 
 load_dotenv()
 
@@ -56,11 +57,11 @@ def get_qa_chain():
     )
 
     vectorstore = Chroma(
-        persist_directory="vector_db",
+        persist_directory=VECTOR_DB_DIR,
         embedding_function=embeddings,
     )
 
-    retriever = vectorstore.as_retriever(search_kwargs={"k": 1})
+    retriever = vectorstore.as_retriever(search_kwargs=RETRIEVAL_K)
     llm = get_llm()
 
     prompt = ChatPromptTemplate.from_template(
