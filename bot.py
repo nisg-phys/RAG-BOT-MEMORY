@@ -16,6 +16,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from config import VECTOR_DB_DIR, RETRIEVAL_K
+from query_utils import preprocess_query
 
 load_dotenv()
 
@@ -116,7 +117,8 @@ if user_input:
     with st.chat_message("assistant"):
         with st.spinner("Searching knowledge base..."):
             try:
-                answer = qa_chain.invoke(user_input)
+                processed_query = preprocess_query(user_input)
+                answer = qa_chain.invoke(processed_query)
                 st.markdown(answer)
 
                 st.session_state.messages.append(
